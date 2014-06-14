@@ -4,8 +4,13 @@ import sys
 import subprocess
 
 player = b'mpv'
+player_stdout = subprocess.DEVNULL
+player_stderr = subprocess.DEVNULL
 
 youtube_dl_destination_filename_msg_prefix = b'[download] Destination: '
+
+def spawn_player(filenames):
+	pass
 
 def main(argv):
 	youtube_dl = subprocess.Popen(
@@ -20,9 +25,12 @@ def main(argv):
 			sys.stdout.write(line.decode())
 
 			if not video_filename_already_found:
+				print("Filename not yet found.", file=sys.stderr)
 				if line.startswith(youtube_dl_destination_filename_msg_prefix):
 					video_filename = line[len(youtube_dl_destination_filename_msg_prefix) : ]
 					video_filename_already_found = True
+
+					print("!!! Filename prefix match. Filename ==", repr(video_filename), file=sys.stderr)
 
 					subprocess.Popen(
 						[ player, '--',
@@ -30,9 +38,13 @@ def main(argv):
 							video_filename+'.part' # First check if file is already downloaded, if not, use the .part file
 						],
 						stdin = subprocess.DEVNULL,
-						stdout = subprocess.DEVNULL,
-						stderr = subprocess.DEVNULL)
+						stdout = player_stdout,
+						stderr = player_stderr)
 						# TODO Should start_new_session=True be also used above?
 
 if __name__ == "__main__":
+
+	if False:
+		player_stdout = ''
+		player_stderr = ''
 	main(sys.argv)
