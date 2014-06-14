@@ -27,8 +27,7 @@ def main(argv):
 
 					subprocess.Popen(
 						[ player, '--',
-							video_filename,
-							video_filename+'.part' # First check if file is already downloaded, if not, use the .part file
+							video_filename+'.part'
 						],
 						stdin = subprocess.DEVNULL)
 						# TODO Should start_new_session=True be also used above?
