@@ -29,6 +29,9 @@ def main(argv):
 		for line in youtube_dl.stdout:
 			sys.stdout.write(line)
 
+			# 'If' here to prevent spawning multiple players playing\
+			# simultaneously when downloading a playlist.
+			# (This script is not intended for that anyway, but better safe than sorry.)
 			if not video_filename_already_found:
 				if line.startswith(youtube_dl_destination_filename_msg_prefix):
 					video_filename = line[len(youtube_dl_destination_filename_msg_prefix) : -1] # -1 for trailing '\n'.
