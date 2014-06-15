@@ -3,7 +3,7 @@
 import sys
 import subprocess
 
-player = 'mpv'
+player_cmd = ['mpv', '--keep-open']
 
 youtube_dl_destination_filename_msg_prefix = '[download] Destination: '
 
@@ -26,7 +26,7 @@ def main(argv):
 					video_filename_already_found = True
 
 					subprocess.Popen(
-						[ player, '--',
+						player_cmd + ['--',
 							video_filename+'.part'
 						],
 						stdin = subprocess.DEVNULL)
