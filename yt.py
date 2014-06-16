@@ -17,13 +17,12 @@ def spawn_player(filename):
 	# TODO Should start_new_session=True be also used above?
 
 def main(argv):
-	youtube_dl = subprocess.Popen(
+	with subprocess.Popen(
 		['youtube-dl'] + argv[1:],
 		universal_newlines = True,
 		stdout = subprocess.PIPE
-		)
+	) as youtube_dl:
 
-	with youtube_dl:
 		video_filename_already_found = False
 
 		for line in youtube_dl.stdout:
