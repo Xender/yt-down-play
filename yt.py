@@ -14,9 +14,7 @@ youtube_dl_destination_filename_msg_prefix = '[download] Destination: '
 
 def spawn_player(filename):
 	return subprocess.Popen(
-		player_cmd + ['--',
-			filename
-		],
+		player_cmd + ['--', filename],
 		stdin = subprocess.DEVNULL
 	)
 	# TODO Should start_new_session=True be also used above?
