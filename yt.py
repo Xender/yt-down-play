@@ -37,8 +37,8 @@ def main(argv):
 			# (This script is not intended for that anyway, but better safe than sorry.)
 			if not video_filename_already_found:
 				if line.startswith(youtube_dl_destination_filename_msg_prefix):
-					video_filename = line[len(youtube_dl_destination_filename_msg_prefix) : -1]+'.part' # -1 for trailing '\n'.
 					video_filename_already_found = True
+					video_filename = line[len(youtube_dl_destination_filename_msg_prefix) : -1]+'.part' # -1 for trailing '\n'.
 
 			else: # == Video filename already found (double negative).
 				if not headers_already_buffered:
